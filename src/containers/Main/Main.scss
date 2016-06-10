@@ -1,0 +1,29 @@
+@import "~styles/mixins";
+
+.main {
+  display: flex;
+  flex-direction: row;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.sidebar, .content {
+  padding: 10px;
+}
+
+.sidebar {
+  flex-grow: 1;
+  background-color: #eee;
+  border-right: 1px solid #aaa;
+
+  @include mobile {
+    border-right: 0;
+    border-bottom: 1px solid #aaa;
+  }
+}
+
+.content {
+  flex-grow: 3;
+}
