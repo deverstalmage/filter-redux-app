@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { reducer as filter } from './modules/filter';
+import { reducer as product } from 'modules/product';
 
-const reducer = combineReducers({ filter });
+const reducer = combineReducers({ product });
 
 export default reducer;

@@ -4,7 +4,7 @@ const initialState = {
 
 };
 
-export default function filter(state = initialState, action) {
+export default function product(state = initialState, action) {
   switch(action.type) {
     case TEST_ACTION:
       return {

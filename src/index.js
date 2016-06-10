@@ -1,9 +1,10 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import Main from './containers/main';
-import reducer from './modules/filter';
+import Main from './containers/Main';
+import reducer from './modules/product';
 
 const store = createStore(reducer);
 
