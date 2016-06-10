@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 import Main from 'containers/Main/Main';
-import reducer from 'modules/product/product';
+import product from 'modules/product/product';
+import filter from 'modules/filter/filter';
 
 require('./styles/app.scss');
 
-const store = createStore(reducer);
+const store = createStore(combineReducers({ filter, product }));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -18,7 +18,8 @@ const propertyTypeOperatorMap = {
 };
 
 const initialState = {
-
+  isFetchingProperties: false,
+  isFetchingOperators: false,
 };
 
 export default function filter(state = initialState, action) {

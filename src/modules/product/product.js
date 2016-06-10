@@ -5,7 +5,7 @@ const FAILED_PRODUCTS = 'salsify/product/FAILED_PRODUCTS';
 // import data from 'services/data';
 
 const initialState = {
-
+  products: [],
 };
 
 export default function product(state = initialState, action) {
