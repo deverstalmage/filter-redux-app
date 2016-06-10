@@ -14,13 +14,14 @@ module.exports = {
       include: __dirname + '/src',
     }, {
       test: /\.scss$/,
-      loaders: ['style', 'css', 'sass']
+      loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
     }, {
       test: /\.json$/,
       loader: 'json-loader',
     }]
   },
   resolve: {
+    root: [__dirname + '/node_modules', __dirname + '/src', __dirname],
     extensions: ['', '.js', '.jsx']
   },
   output: {
