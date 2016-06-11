@@ -23,4 +23,10 @@ module.exports = {
     publicPath: '/',
     filename: 'app.js'
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react',
+      classNames: 'classnames',
+    }),
+  ]
 };
