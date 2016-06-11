@@ -1,9 +1,9 @@
-const products = [
+export const products = [
   {
     id: 0,
-    property_values: [
+    properties: [
       {
-        property_id: 0
+        property_id: 0,
         value: 'Headphones'
       },
       {
@@ -138,5 +138,3 @@ const products = [
     ]
   }
 ];
-
-export default products;

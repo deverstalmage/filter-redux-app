@@ -11,7 +11,7 @@ module.exports = {
       test: /\.jsx?$/,
       // exclude: /node_modules/,
       loaders: ['react-hot', 'jsx', 'babel'],
-      include: __dirname + '/src',
+      include: [__dirname + '/src', __dirname + '/data'],
     }, {
       test: /\.scss$/,
       loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
@@ -29,7 +29,7 @@ module.exports = {
     publicPath: '/',
     filename: 'app.js'
   },
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: './dist',
     hot: true

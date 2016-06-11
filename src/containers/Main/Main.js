@@ -10,9 +10,12 @@ import * as filterActions from 'modules/filter/filter';
 require('./Main.scss');
 
 class Main extends Component {
+  componentDidMount() {
+    this.props.actions.product.fetchProducts();
+  }
+
   render() {
-    const { product, filter, actions } = this.props;
-    console.log(this.props);
+    const { products, filter, actions } = this.props;
 
     return (
       <div className="main">
@@ -20,7 +23,7 @@ class Main extends Component {
           <FilterControl />
         </aside>
         <main className="content">
-          <ProductList products={product.products} />
+          <ProductList products={products} />
         </main>
       </div>
     );
@@ -30,7 +33,7 @@ class Main extends Component {
 export default connect(
   state => ({
     filter: state.filter,
-    product: state.product,
+    products: state.product.products,
   }),
   dispatch => ({
     actions: {

@@ -1,3 +1,5 @@
+import * as dataService from 'services/data';
+
 const REQUEST_PROPERTIES = 'salsify/filter/REQUEST_PROPERTIES';
 const RECEIVE_PROPERTIES = 'salsify/filter/RECEIVE_PROPERTIES';
 const FAILED_PROPERTIES = 'salsify/filter/FAILED_PROPERTIES';
@@ -20,6 +22,10 @@ const propertyTypeOperatorMap = {
 const initialState = {
   isFetchingProperties: false,
   isFetchingOperators: false,
+  properties: [],
+  propertyMap: {},
+  operators: [],
+  operatorMap: {},
 };
 
 export default function filter(state = initialState, action) {
@@ -62,27 +68,67 @@ export default function filter(state = initialState, action) {
   }
 };
 
-// export function
-export function requestProducts() {
+export function requestProperties() {
   return {
     type: REQUEST_PROPERTIES,
   };
 }
 
-export function receiveProducts(properties) {
+export function receiveProperties(properties) {
   return {
     type: RECEIVE_PROPERTIES,
     properties,
   };
 }
 
-export function fetchProductsFailed(error) {
+export function failedProperties(error) {
   return {
     type: FAILED_PROPERTIES,
     error,
   };
 }
 
-export function fetchProducts() {
+export function fetchProperties() {
+  return (dispatch, getState) => {
+    const currentState = getState();
+    dispatch(requestProperties());
+
+    let loadProperties = dataService.loadProperties();
+    if (currentState.filter.properties.length > 0) loadProperties = Promise.resolve(currentState.filter.properties);
+
+    return loadProperties
+      .then(properties => dispatch(receiveProperties(properties)))
+      .catch(error => {
+        console.log('Error', error);
+        dispatch(failedProperties(error));
+      });
+  };
+}
+
+
+
+
+
+export function requestOperators() {
+  return {
+    type: REQUEST_OPERATORS,
+  };
+}
+
+export function receiveOperators(properties) {
+  return {
+    type: RECEIVE_OPERATORS,
+    properties,
+  };
+}
+
+export function failedOperators(error) {
+  return {
+    type: FAILED_OPERATORS,
+    error,
+  };
+}
+
+export function fetchOperators() {
 
 }

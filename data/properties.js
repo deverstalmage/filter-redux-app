@@ -1,38 +1,32 @@
-const properties = [
+export const properties = [
   {
     id: 0,
     name: 'Product Name',
-    type: 'string'
-  },
-  {
+    type: 'string',
+  }, {
     id: 1,
     name: 'color',
-    type: 'string'
-  },
-  {
+    type: 'string',
+  }, {
     id: 2,
     name: 'weight (oz)',
-    type: 'number'
-  },
-  {
+    type: 'number',
+  }, {
     id: 3,
     name: 'category',
     type: 'enumerated',
     values: [
       'tools',
       'electronics',
-      'kitchenware'
-    ]
-  },
-  {
+      'kitchenware',
+    ],
+  }, {
     id: 4,
     name: 'wireless',
     type: 'enumerated',
     values: [
       'true',
-      'false'
-    ]
-  }
+      'false',
+    ],
+  },
 ];
-
-export default properties;
