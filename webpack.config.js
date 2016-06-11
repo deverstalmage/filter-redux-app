@@ -9,9 +9,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      // exclude: /node_modules/,
-      loaders: ['react-hot', 'jsx', 'babel'],
       include: [__dirname + '/src', __dirname + '/data'],
+      loaders: ['react-hot', 'jsx', 'babel'],
     }, {
       test: /\.scss$/,
       loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
