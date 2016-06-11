@@ -1,7 +1,13 @@
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
+
+require('./Product.scss');
 
 export default class Product extends Component {
+
+  static propTypes = {
+    properties: PropTypes.object.isRequired,
+  }
 
   constructor(props) {
     super(props);
@@ -9,8 +15,19 @@ export default class Product extends Component {
   }
 
   render() {
+    const { properties } = this.props;
+
     return (
-      <div>Product</div>
+      <div className="product">
+        {Object.keys(properties).map(propertyId => {
+          const property = properties[propertyId];
+          return (
+            <div className="product__property" key={`property-${propertyId}`}>
+              <strong>{property.name}: </strong><em>{property.value}</em>
+            </div>
+          );
+        })}
+      </div>
     );
   }
 }

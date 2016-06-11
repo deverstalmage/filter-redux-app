@@ -3,11 +3,12 @@ import { operators } from 'data/operators';
 const UPDATE_OPERATOR = 'salsify/filter/UPDATE_OPERATOR';
 const UPDATE_PROPERTY_NAME = 'salsify/filter/UPDATE_PROPERTY_NAME';
 const UPDATE_PROPERTY_VALUE = 'salsify/filter/UPDATE_PROPERTY_VALUE';
+const CLEAR = 'salsify/filter/CLEAR';
 
 const initialState = {
-  operator: null,
-  propertyType: null,
-  propertyValue: null,
+  operator: '',
+  propertyType: '',
+  propertyValue: '',
 };
 
 export default function filter(state = initialState, action) {
@@ -28,14 +29,42 @@ export default function filter(state = initialState, action) {
         ...state,
         propertyValue: action.propertyValue,
       };
+    case CLEAR:
+      return {
+        ...state,
+        operator: null,
+        propertyName: null,
+        propertyValue: null,
+      };
 
     default:
       return state;
   }
 };
 
-export function setFilter(name, operator, value) {
+export function updateOperator(operator) {
   return {
-    
+    type: UPDATE_OPERATOR,
+    operator,
+  };
+}
+
+export function updateProperyName(propertyName) {
+  return {
+    type: UPDATE_PROPERTY_NAME,
+    propertyName,
+  };
+}
+
+export function updatePropertyValue(propertyValue) {
+  return {
+    type: UPDATE_PROPERTY_VALUE,
+    propertyValue,
+  };
+}
+
+export function clearFilter() {
+  return {
+    type: CLEAR,
   };
 }

@@ -1,0 +1,24 @@
+@import "~styles/measurements";
+@import "~styles/mixins";
+
+.filter-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include mobile {
+    // flex-direction: row
+  }
+}
+
+.filter-control__select, .filter-control__input {
+  margin-bottom: $margin;
+}
+
+.filter-control__select {
+  margin-bottom: 10px;
+}
+
+.filter-control__input {
+
+}

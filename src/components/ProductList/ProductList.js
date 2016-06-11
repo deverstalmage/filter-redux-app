@@ -2,29 +2,18 @@ import { Component, PropTypes } from 'react';
 
 import Product from 'components/Product/Product';
 
+require('./ProductList.scss')
+
 export default class ProductList extends Component {
   static propTypes = {
-    products: PropTypes.array,
+    products: PropTypes.array.isRequired,
   }
 
   render() {
     const { products } = this.props;
     return (
-      <div>
-        {products.map(product => {
-          return (
-            <div>
-              {Object.keys(product.properties).map(propertyId => {
-                const property = product.properties[propertyId];
-                return (
-                  <div>
-                    <em>{property.value}</em>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+      <div className="product-list">
+        {products.map((product, i) => <Product properties={product.properties} key={`product-${product.id}`} />)}
       </div>
     );
   }

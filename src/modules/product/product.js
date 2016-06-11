@@ -1,4 +1,6 @@
 import * as dataService from 'services/data';
+import { operators } from 'data/operators';
+import { mapToIds } from 'lib/utils';
 
 const REQUEST_PRODUCTS = 'salsify/product/REQUEST_PRODUCTS';
 const RECEIVE_PRODUCTS = 'salsify/product/RECEIVE_PRODUCTS';
@@ -9,13 +11,14 @@ const REQUEST_PROPERTIES = 'salsify/product/REQUEST_PROPERTIES';
 const RECEIVE_PROPERTIES = 'salsify/product/RECEIVE_PROPERTIES';
 const FAILED_PROPERTIES = 'salsify/product/FAILED_PROPERTIES';
 
-const equals = (a, b) => a === b;
-const greater_than = (a, b) => a > b;
-const less_than = (a, b) => a < b;
-const any = val => val || val === 0;
-const none = val => !val;
-const isIn = (val, enumerated) => enumerated.indexOf(val) > -1;
-const contains = (b, a) => b.toString().includes(a.toString());
+// exporting for testing purposes
+export const equals = (a, b) => a === b;
+export const greater_than = (a, b) => a > b;
+export const less_than = (a, b) => a < b;
+export const any = val => val || val === 0;
+export const none = val => !val;
+export const isIn = (val, enumerated) => enumerated.indexOf(val) > -1;
+export const contains = (b, a) => b.toString().includes(a.toString());
 
 const propertyTypeOperatorMap = {
   string: {
@@ -49,6 +52,9 @@ const initialState = {
 
   properties: [],
   propertiesMap: {},
+
+  operators,
+  operatorsMap: mapToIds(operators, 'id'),
 };
 
 export function filterProductList(products, name, operator, value) {
@@ -104,10 +110,7 @@ export default function product(state = initialState, action) {
       };
     case RECEIVE_PROPERTIES:
       const properties = [...action.properties];
-      const propertyMap = properties.reduce((prev, curr) => {
-        prev[curr.id] = curr;
-        return prev;
-      }, {});
+      const propertyMap = mapToIds(properties, 'id');
 
       return {
         ...state,

@@ -1,0 +1,15 @@
+@import "~styles/measurements";
+
+.product {
+  flex-basis: 200px;
+  min-height: 200px;
+  background-color: white;
+  border-radius: 6px;
+  margin: $margin;
+  padding: $margin;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+.product__property {
+
+}
