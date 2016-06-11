@@ -1,134 +1,41 @@
-import * as dataService from 'services/data';
+import { operators } from 'data/operators';
 
-const REQUEST_PROPERTIES = 'salsify/filter/REQUEST_PROPERTIES';
-const RECEIVE_PROPERTIES = 'salsify/filter/RECEIVE_PROPERTIES';
-const FAILED_PROPERTIES = 'salsify/filter/FAILED_PROPERTIES';
-
-const REQUEST_OPERATORS = 'salsify/filter/REQUEST_OPERATORS';
-const RECEIVE_OPERATORS = 'salsify/filter/RECEIVE_OPERATORS';
-const FAILED_OPERATORS = 'salsify/filter/FAILED_OPERATORS';
-
-const UPDATE_FILTER = 'salsify/filter/UPDATE_FILTER';
-
-// import data from 'services/data';
-
-const propertyTypeOperatorMap = {
-  string: {
-    equals: true,
-
-  }
-};
+const UPDATE_OPERATOR = 'salsify/filter/UPDATE_OPERATOR';
+const UPDATE_PROPERTY_NAME = 'salsify/filter/UPDATE_PROPERTY_NAME';
+const UPDATE_PROPERTY_VALUE = 'salsify/filter/UPDATE_PROPERTY_VALUE';
 
 const initialState = {
-  isFetchingProperties: false,
-  isFetchingOperators: false,
-  properties: [],
-  propertyMap: {},
-  operators: [],
-  operatorMap: {},
+  operator: null,
+  propertyType: null,
+  propertyValue: null,
 };
 
 export default function filter(state = initialState, action) {
   switch(action.type) {
-    case REQUEST_PROPERTIES:
+    case UPDATE_OPERATOR:
       return {
         ...state,
-        isFetchingProperties: true,
+        operator: action.operator,
       };
-    case RECEIVE_PROPERTIES:
+
+    case UPDATE_PROPERTY_NAME:
       return {
         ...state,
-        isFetchingProperties: false,
-        properties: [...action.properties],
+        propertyName: action.propertyName,
       };
-    case FAILED_PROPERTIES:
+    case UPDATE_PROPERTY_VALUE:
       return {
         ...state,
-        isFetchingProperties: false,
-        properties: [],
-        error: action.error,
+        propertyValue: action.propertyValue,
       };
-    case REQUEST_OPERATORS:
-      return {
-        ...state,
-        isFetchingOperators: true,
-      };
-    case RECEIVE_OPERATORS:
-      const operatorIdMap = action.operators.reduce((prev, curr) => {
-        prev[curr.id] = curr.text;
-        return prev;
-      }, {});
-      return {
-        ...state,
-        isFetchingOperators: false,
-        operators: operatorIdMap,
-      };
+
     default:
       return state;
   }
 };
 
-export function requestProperties() {
+export function setFilter(name, operator, value) {
   return {
-    type: REQUEST_PROPERTIES,
+    
   };
-}
-
-export function receiveProperties(properties) {
-  return {
-    type: RECEIVE_PROPERTIES,
-    properties,
-  };
-}
-
-export function failedProperties(error) {
-  return {
-    type: FAILED_PROPERTIES,
-    error,
-  };
-}
-
-export function fetchProperties() {
-  return (dispatch, getState) => {
-    const currentState = getState();
-    dispatch(requestProperties());
-
-    let loadProperties = dataService.loadProperties();
-    if (currentState.filter.properties.length > 0) loadProperties = Promise.resolve(currentState.filter.properties);
-
-    return loadProperties
-      .then(properties => dispatch(receiveProperties(properties)))
-      .catch(error => {
-        console.log('Error', error);
-        dispatch(failedProperties(error));
-      });
-  };
-}
-
-
-
-
-
-export function requestOperators() {
-  return {
-    type: REQUEST_OPERATORS,
-  };
-}
-
-export function receiveOperators(properties) {
-  return {
-    type: RECEIVE_OPERATORS,
-    properties,
-  };
-}
-
-export function failedOperators(error) {
-  return {
-    type: FAILED_OPERATORS,
-    error,
-  };
-}
-
-export function fetchOperators() {
-
 }

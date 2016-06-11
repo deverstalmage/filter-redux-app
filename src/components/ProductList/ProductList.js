@@ -9,13 +9,13 @@ export default class ProductList extends Component {
 
   render() {
     const { products } = this.props;
-    console.log('products', products);
     return (
       <div>
         {products.map(product => {
           return (
             <div>
-              {product.properties.map(property => {
+              {Object.keys(product.properties).map(propertyId => {
+                const property = product.properties[propertyId];
                 return (
                   <div>
                     <em>{property.value}</em>
