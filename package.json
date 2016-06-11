@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --port 3000",
     "build": "NODE_ENV=production webpack --config webpack.config.prod.js",
-    "test": "mocha --compilers js:babel-core/register --require ignore-styles \"**/*.spec.js\""
+    "test": "mocha --recursive --compilers js:babel-core/register --require ignore-styles \"**/*.spec.js\""
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +29,8 @@
     "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
+    "expect": "^1.20.1",
+    "expect-jsx": "^2.6.0",
     "ignore-styles": "^3.0.0",
     "jsdom": "^9.2.1",
     "jsx-loader": "^0.13.2",

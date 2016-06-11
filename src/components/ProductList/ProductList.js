@@ -15,7 +15,7 @@ export default class ProductList extends Component {
     return (
       <div >
         <ReactCSSTransitionGroup component="div" className="product-list" transitionName="fade-slide" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-          {products.map((product, i) => <Product properties={product.properties} key={`product-${product.id}`} />)}
+          {products.map(product => <Product properties={product.properties} key={`product-${product.id}`} />)}
         </ReactCSSTransitionGroup>
       </div>
     );

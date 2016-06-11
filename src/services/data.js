@@ -1,6 +1,6 @@
-import { products } from 'data/products';
-import { properties } from 'data/properties';
-import { operators } from 'data/operators';
+import { products } from '../../data/products';
+import { properties } from '../../data/properties';
+import { operators } from '../../data/operators';
 
 /* let's pretend this makes a real HTTP request */
 export function loadProducts() {

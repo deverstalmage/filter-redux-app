@@ -1,5 +1,5 @@
-import * as dataService from 'services/data';
-import { mapToIds } from 'lib/utils';
+import * as dataService from '../../services/data';
+import { mapToIds } from '../../lib/utils';
 
 const REQUEST_PRODUCTS = 'salsify/product/REQUEST_PRODUCTS';
 const RECEIVE_PRODUCTS = 'salsify/product/RECEIVE_PRODUCTS';
@@ -46,14 +46,14 @@ export const propertyTypeOperatorMap = {
 
 const initialState = {
   products: [],
-  allProductMap: {},
   allProducts: [],
 
   properties: [],
   propertiesMap: {},
 };
 
-export function filterProductList(products, name, operator, value, type) {
+export function filterProductList(products, name, operator, value, type, propertyTypeOperatorMap) {
+  if (!name && !operator && !value) return products;
   if (operator === 'in') value = value.split(',').map(val => val.trim());
   const filterFunc = propertyTypeOperatorMap[type][operator];
 
@@ -72,20 +72,20 @@ export default function product(state = initialState, action) {
         isFetching: true,
       };
     case RECEIVE_PRODUCTS:
-      const products = action.products;
       const allProducts = [...action.products]; // neat way to copy an array
-      const allProductsMap = products.map(product => {
-        return product.properties = product.properties.reduce((prev, curr) => {
+      const products = action.products.map(p => {
+        const product = {...p};
+        product.properties = product.properties.reduce((prev, curr) => {
           prev[curr.property_id] = Object.assign(curr, { name: state.propertiesMap[curr.property_id].name });
           return prev;
         }, {});
+        return product;
       });
 
       return {
         ...state,
         products,
         allProducts,
-        allProductsMap,
         isFetching: false,
       };
     case FAILED_PRODUCTS:
@@ -97,10 +97,12 @@ export default function product(state = initialState, action) {
       };
 
     case FILTER_PRODUCTS:
-      const update = (action.propertyName && action.operator && action.propertyValue) || action.updateWithoutAllFields;
+      const { propertyName, operator, propertyValue, updateWithoutAllFields } = action;
+      const update = (propertyName && operator && propertyValue) || updateWithoutAllFields || (!propertyName && !operator && !propertyValue);
+      const property = state.propertiesMap[propertyName] || {};
       return {
         ...state,
-        products: update ? filterProductList(state.allProducts, action.propertyName, action.operator, action.propertyValue, state.propertiesMap[action.propertyName].type) : state.allProducts,
+        products: update ? filterProductList(state.allProducts, propertyName, operator, propertyValue, property.type, propertyTypeOperatorMap) : state.allProducts,
       };
 
     case REQUEST_PROPERTIES:

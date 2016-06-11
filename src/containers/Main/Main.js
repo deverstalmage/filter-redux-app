@@ -15,6 +15,7 @@ class Main extends Component {
     this.setOperator = ::this.setOperator;
     this.setPropertyName = ::this.setPropertyName;
     this.setPropertyValue = ::this.setPropertyValue;
+    this.clearFilter = ::this.clearFilter;
   }
 
   setOperator(e) {
@@ -38,8 +39,14 @@ class Main extends Component {
     actions.product.filterProducts(filter.propertyName, filter.operator, val);
   }
 
+  clearFilter() {
+    const { actions, filter } = this.props;
+    actions.filter.clearFilter();
+    actions.product.filterProducts('', '', '', true);
+  }
+
   render() {
-    const { products, properties, filter } = this.props;
+    const { products, properties, filter, actions } = this.props;
 
 
     return (
@@ -54,6 +61,7 @@ class Main extends Component {
             onChangeOperator={this.setOperator}
             onChangePropertyName={this.setPropertyName}
             onChangePropertyValue={this.setPropertyValue}
+            onClear={this.clearFilter}
           />
         </aside>
         <main className="content">

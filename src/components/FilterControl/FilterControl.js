@@ -28,6 +28,7 @@ export default class FilterControls extends Component {
       onChangePropertyName,
       onChangeOperator,
       onChangePropertyValue,
+      onClear,
     } = this.props;
 
     return (
@@ -51,6 +52,7 @@ export default class FilterControls extends Component {
           placeholder="enter property value here"
           id="property-value"
         />
+      <button onClick={onClear}>Clear</button>
       </div>
     );
   }

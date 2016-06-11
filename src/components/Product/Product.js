@@ -1,5 +1,5 @@
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 require('./Product.scss');
 
