@@ -1,6 +1,8 @@
 # React + Redux product filter app
 
-This is a simple web app built with [React](https://facebook.github.io/react/) and [Redux](https://github.com/reactjs/redux) that filters a list of potentially dynamic products (right now they are hardcoded, but delivered to the app asynchronously via Promises) and product properties via a set of operators. The app is built for maximum extensibility -- I wanted to create something that I could use as a blueprint for future app construction. I'd say took ~10 hours to create (including putting together the boilerplate)
+[Check out the app live!](https://deve.rs/filter/)
+
+This is a simple web app built with [React](https://facebook.github.io/react/) and [Redux](https://github.com/reactjs/redux) that filters a list of potentially dynamic products (right now they are hardcoded, but delivered to the app asynchronously via Promises) and product properties via a set of operators. The app is built for maximum extensibility -- I wanted to create something that I could use as a blueprint for future app construction. I'd say took ~10 hours to create (including putting together the boilerplate). The app makes use of webpack along with Babel to pack, transpile, and minify the code.
 
 ## Useful commands
 
@@ -14,7 +16,7 @@ For this project, I assumed that this app would eventually needed to be built up
 
 ### Points of interest
 
-Most of the app's logic is in the product module: `src/modules/product/product.js`. Each module houses the action creators, reducers, and action constants for various sections of the app. For instance, this app has a filter module, for controlling the selection of various filtering options, and a product module, for keeping track of the products and their associated properties. The unit tests for the product module can be found in the same directory, under `product.spec.js`.
+Most of the app's logic is in the product module: `src/modules/product/product.js`. Each module houses the action creators, reducers, and action constants for various sections of the app. For instance, this app has a filter module, for controlling the selection of various filtering options, and a product module, for keeping track of the products and their associated properties. The unit tests for the product module can be found in the same directory, under `product.spec.js`. I'm not sure yet if I prefer the module pattern to the more common `reducers` and `actions` structure, i.e. putting all of your reducers into a directory, and all of your actions into another directory vs combining them and separating by concern.
 
 Also of note is the Main container located at `src/containers/Main/Main.js`. As a side note, I'm not thrilled with the repetition in the naming conventions, but it's a lot easier to see what file you're working on in your editor when they aren't all named `index.js`. The directory structure also allows for the bundling of related files, e.g. Sass and testing files. The Main container is where we connect the state from our store to the app's components. In a multi-route SPA you would load this container via a router of some sort, but here we are just dropping it into our entry point file `src/index.js` because the app only has one view.
 
@@ -22,8 +24,8 @@ Also of note is the Main container located at `src/containers/Main/Main.js`. As 
 
 `src/services/data.js` is a mock data fetching service -- if this were deployed in the real world, we would most likely want to grab the products and properties from an API of some sort via HTTP requests. The data loading functions return Promises to simulate how a network call would work here.
 
-The CSS (Sass) for this project is fairly straight-forward. One cool thing to note though is that the `.scss` files are loaded directly into the components. `src/containers/Main`, `src/components/Product`, `src/components/ProductList` and `src/components/FilterControl` all have their own Sass stylesheet, and there are app-wide styles located at `src/style`.
+The CSS (Sass) for this project is fairly straight-forward. One cool thing to note though is that the `.scss` files are loaded directly into the components. `src/containers/Main`, `src/components/Product`, `src/components/ProductList` and `src/components/FilterControl` all have their own Sass stylesheet, and there are app-wide styles located at `src/style`. The layout is primarily created with flex-box.
 
 ### Things to work on
 
-Obviously the app could be a bit prettier. Like I mentioned above, interfacing with a RESTful API would no doubt add lots of functionality to this. Adding more test coverage is almost always desirable -- I would start with covering the components, the entire surface area of the product module, and then also the filter module. A more substantially tuned webpack config for the production build would also be welcome.
+Obviously the app could be a bit prettier. Like I mentioned above, interfacing with a RESTful API would no doubt add lots of functionality to this. Adding more test coverage is almost always desirable -- I would start with covering the components, the entire surface area of the product module, and then also the filter module. A more substantially tuned webpack config for the production build would also be welcome. Working to get the stylesheet in a better place (getting webpack to optimize them better, consolidating variables and mixins into global files, etc) is also on my to-do list.
