@@ -2,3 +2,25 @@
   display: flex;
   flex-flow: row wrap;
 }
+
+.fade-slide-enter {
+  opacity: 0.01;
+  transform: translateX(-5px);
+}
+
+.fade-slide-enter.fade-slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+.fade-slide-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-slide-leave-active {
+  opacity: 0.01;
+  transform: translateX(5px);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}

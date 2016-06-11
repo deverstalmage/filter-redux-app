@@ -1,4 +1,6 @@
 import { operators } from 'data/operators';
+import { mapToIds } from 'lib/utils';
+import { propertyTypeOperatorMap } from 'modules/product/product';
 
 const UPDATE_OPERATOR = 'salsify/filter/UPDATE_OPERATOR';
 const UPDATE_PROPERTY_NAME = 'salsify/filter/UPDATE_PROPERTY_NAME';
@@ -9,6 +11,10 @@ const initialState = {
   operator: '',
   propertyType: '',
   propertyValue: '',
+
+  operators,
+  allOperators: [...operators],
+  allOperatorsMap: mapToIds(operators, 'id'),
 };
 
 export default function filter(state = initialState, action) {
@@ -23,6 +29,7 @@ export default function filter(state = initialState, action) {
       return {
         ...state,
         propertyName: action.propertyName,
+        operators: state.allOperators.filter(op => propertyTypeOperatorMap[action.propertyType][op.id]),
       };
     case UPDATE_PROPERTY_VALUE:
       return {
@@ -32,9 +39,9 @@ export default function filter(state = initialState, action) {
     case CLEAR:
       return {
         ...state,
-        operator: null,
-        propertyName: null,
-        propertyValue: null,
+        operator: '',
+        propertyName: '',
+        propertyValue: '',
       };
 
     default:
@@ -49,10 +56,11 @@ export function updateOperator(operator) {
   };
 }
 
-export function updateProperyName(propertyName) {
+export function updatePropertyName(propertyName, propertyType) {
   return {
     type: UPDATE_PROPERTY_NAME,
     propertyName,
+    propertyType,
   };
 }
 

@@ -19,19 +19,28 @@ export default class FilterControls extends Component {
   }
 
   render() {
-    const { properties, operators, propertyName, operator, propertyValue, onChangePropertyName, onChangeOperator, onChangePropertyValue } = this.props;
+    const {
+      properties,
+      operators,
+      propertyName,
+      operator,
+      propertyValue,
+      onChangePropertyName,
+      onChangeOperator,
+      onChangePropertyValue,
+    } = this.props;
 
     return (
       <div className="filter-control">
         <label for="property-name">Property Name:</label>
         <select className="filter-control__select" value={propertyName} onChange={onChangePropertyName} id="property-name">
           <option value="">-- select property name --</option>
-          {properties.map(prop => <option value={prop.id}>{prop.name}</option>)}
+          {properties.map(prop => <option key={`property-name-${prop.id}`} value={prop.id}>{prop.name}</option>)}
         </select>
         <label for="operator">Operator</label>
         <select className="filter-control__select" value={operator} onChange={onChangeOperator} id="operator">
           <option value="">-- select operator --</option>
-          {operators.map(op => <option value={op.id}>{op.text}</option>)}
+          {operators.map(op => <option key={`operator-${op.id}`} value={op.id}>{op.text}</option>)}
         </select>
         <label for="property-value">Property Value:</label>
         <input

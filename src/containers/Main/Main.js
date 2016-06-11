@@ -19,31 +19,38 @@ class Main extends Component {
 
   setOperator(e) {
     const val = e.target.value;
-    console.log(val);
+    const { actions, filter } = this.props;
+    actions.filter.updateOperator(val);
+    actions.product.filterProducts(filter.propertyName, val, filter.propertyValue, (val === 'any' || val === 'none') && filter.propertyName);
   }
 
   setPropertyName(e) {
     const val = e.target.value;
-    console.log(val);
+    const { actions, filter, propertiesMap } = this.props;
+    actions.filter.updatePropertyName(val, propertiesMap[val].type);
+    actions.product.filterProducts(val, filter.operator, filter.propertiesValue);
   }
 
   setPropertyValue(e) {
     const val = e.target.value;
-    console.log(val);
+    const { actions, filter } = this.props;
+    actions.filter.updatePropertyValue(val);
+    actions.product.filterProducts(filter.propertyName, filter.operator, val);
   }
 
   render() {
-    const { products, properties, operators, filter, actions } = this.props;
+    const { products, properties, filter } = this.props;
+
 
     return (
       <div className="main">
         <aside className="sidebar">
           <FilterControl
+            properties={properties}
             propertyName={filter.propertyName}
             propertyValue={filter.propertyValue}
             operator={filter.operator}
-            properties={properties}
-            operators={operators}
+            operators={filter.operators}
             onChangeOperator={this.setOperator}
             onChangePropertyName={this.setPropertyName}
             onChangePropertyValue={this.setPropertyValue}
@@ -61,8 +68,9 @@ export default connect(
   state => ({
     filter: state.filter,
     products: state.product.products,
-    operators: state.product.operators,
     properties: state.product.properties,
+    propertiesMap: state.product.propertiesMap,
+    propertyTypeOperatorMap: state.product.propertyTypeOperatorMap,
   }),
   dispatch => ({
     actions: {

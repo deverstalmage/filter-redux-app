@@ -28,4 +28,8 @@ describe('product reducer', () => {
     });
   });
 
+  describe('filterProductList', () => {
+    
+  });
+
 });
