@@ -2,10 +2,10 @@ import { operators } from 'data/operators';
 import { mapToIds } from 'lib/utils';
 import { propertyTypeOperatorMap } from 'modules/product/product';
 
-const UPDATE_OPERATOR = 'salsify/filter/UPDATE_OPERATOR';
-const UPDATE_PROPERTY_NAME = 'salsify/filter/UPDATE_PROPERTY_NAME';
-const UPDATE_PROPERTY_VALUE = 'salsify/filter/UPDATE_PROPERTY_VALUE';
-const CLEAR = 'salsify/filter/CLEAR';
+const UPDATE_OPERATOR = 'filterApp/filter/UPDATE_OPERATOR';
+const UPDATE_PROPERTY_NAME = 'filterApp/filter/UPDATE_PROPERTY_NAME';
+const UPDATE_PROPERTY_VALUE = 'filterApp/filter/UPDATE_PROPERTY_VALUE';
+const CLEAR = 'filterApp/filter/CLEAR';
 
 const initialState = {
   operator: '',

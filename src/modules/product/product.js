@@ -1,14 +1,14 @@
 import * as dataService from '../../services/data';
 import { mapToIds } from '../../lib/utils';
 
-const REQUEST_PRODUCTS = 'salsify/product/REQUEST_PRODUCTS';
-const RECEIVE_PRODUCTS = 'salsify/product/RECEIVE_PRODUCTS';
-const FAILED_PRODUCTS = 'salsify/product/FAILED_PRODUCTS';
-const FILTER_PRODUCTS = 'salsify/product/FILTER_PRODUCTS';
+const REQUEST_PRODUCTS = 'filterApp/product/REQUEST_PRODUCTS';
+const RECEIVE_PRODUCTS = 'filterApp/product/RECEIVE_PRODUCTS';
+const FAILED_PRODUCTS = 'filterApp/product/FAILED_PRODUCTS';
+const FILTER_PRODUCTS = 'filterApp/product/FILTER_PRODUCTS';
 
-const REQUEST_PROPERTIES = 'salsify/product/REQUEST_PROPERTIES';
-const RECEIVE_PROPERTIES = 'salsify/product/RECEIVE_PROPERTIES';
-const FAILED_PROPERTIES = 'salsify/product/FAILED_PROPERTIES';
+const REQUEST_PROPERTIES = 'filterApp/product/REQUEST_PROPERTIES';
+const RECEIVE_PROPERTIES = 'filterApp/product/RECEIVE_PROPERTIES';
+const FAILED_PROPERTIES = 'filterApp/product/FAILED_PROPERTIES';
 
 // exporting for testing purposes
 export const equals = (a, b) => a === b;
